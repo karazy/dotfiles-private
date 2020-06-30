@@ -103,3 +103,4 @@ eval "$(nodenv init -)"
 alias kc=kubectl
 alias tf=terraform
 alias dotfiles='git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME/'
+alias .f=dotfiles
