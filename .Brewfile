@@ -14,5 +14,6 @@ cask "visual-studio-code"
 cask "alfred"
 cask "sourcetree"
 cask "spotify"
+cask "Postman"
 
 mas "Pixelmator", id: 407963104
