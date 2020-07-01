@@ -8,6 +8,7 @@ brew "google-cloud-sdk"
 brew "azure-cli"
 brew "terraform"
 brew "mas"
+brew "python"
 
 cask "firefox"
 cask "visual-studio-code"
