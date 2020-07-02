@@ -9,6 +9,7 @@ brew "azure-cli"
 brew "terraform"
 brew "mas"
 brew "python"
+brew "kubectx"
 
 cask "firefox"
 cask "visual-studio-code"
