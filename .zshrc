@@ -99,8 +99,26 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(nodenv init -)"
 
-#Aliases
-alias kc=kubectl
-alias tf=terraform
-alias dotfiles='git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME/'
-alias .f=dotfiles
+
+eval export PATH="/Users/reifschneider/.jenv/shims:${PATH}"
+export JENV_SHELL=zsh
+export JENV_LOADED=1
+unset JAVA_HOME
+source '/usr/local/Cellar/jenv/0.5.3/libexec/libexec/../completions/jenv.zsh'
+jenv rehash 2>/dev/null
+jenv() {
+  typeset command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  enable-plugin|rehash|shell|shell-options)
+    eval `jenv "sh-$command" "$@"`;;
+  *)
+    command jenv "$command" "$@";;
+  esac
+}
+
+source ~/.shell-aliases
