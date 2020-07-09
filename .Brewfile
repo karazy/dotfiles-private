@@ -18,5 +18,6 @@ cask "sourcetree"
 cask "spotify"
 cask "Postman"
 cask "intellij-idea-ce"
+cask "clipy"
 
 mas "Pixelmator", id: 407963104
