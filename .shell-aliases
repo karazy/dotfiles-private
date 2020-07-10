@@ -7,3 +7,10 @@ function inc-install() {
   npx google-artifactregistry-auth ~/.npmrc
   npm install $@
 }
+
+alias cdev='cd ~/Dev'
+alias docko=docker-compose
+
+function b64D() {
+  echo $1 | base64 --decode
+}
