@@ -14,3 +14,7 @@ alias docko=docker-compose
 function b64D() {
   echo $1 | base64 --decode
 }
+
+function rcDir() {
+  rm -rf $1 && mkdir $1 && cd $1
+}
