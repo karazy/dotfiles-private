@@ -9,6 +9,7 @@ brew "terraform"
 brew "mas"
 brew "python"
 brew "kubectx"
+brew "gradle"
 
 cask "firefox"
 cask "google-cloud-sdk"
