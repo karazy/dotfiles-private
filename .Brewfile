@@ -10,6 +10,7 @@ brew "mas"
 brew "python"
 brew "kubectx"
 brew "gradle"
+brew "fzf"
 
 cask "firefox"
 cask "google-cloud-sdk"
