@@ -11,6 +11,7 @@ brew "python"
 brew "kubectx"
 brew "gradle"
 brew "fzf"
+brew "k9s"
 
 cask "firefox"
 cask "google-cloud-sdk"
