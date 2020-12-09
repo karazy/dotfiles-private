@@ -121,4 +121,5 @@ jenv() {
   esac
 }
 
+export PATH=$PATH:~/.scripts
 source ~/.shell-aliases
