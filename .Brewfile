@@ -23,5 +23,6 @@ cask "spotify"
 cask "Postman"
 cask "intellij-idea-ce"
 cask "clipy"
+cask "kitty"
 
-mas "Pixelmator", id: 407963104
+mas "Pixelmator Pro", id: 1289583905   

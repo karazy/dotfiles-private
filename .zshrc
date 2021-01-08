@@ -100,12 +100,12 @@ source $ZSH/oh-my-zsh.sh
 eval "$(nodenv init -)"
 
 
-eval export PATH="/Users/reifschneider/.jenv/shims:${PATH}"
+#eval export PATH="/Users/reifschneider/.jenv/shims:${PATH}"
 export JENV_SHELL=zsh
 export JENV_LOADED=1
 unset JAVA_HOME
-source '/usr/local/Cellar/jenv/0.5.3/libexec/libexec/../completions/jenv.zsh'
-jenv rehash 2>/dev/null
+#source '/usr/local/Cellar/jenv/0.5.3/libexec/libexec/../completions/jenv.zsh'
+#jenv rehash 2>/dev/null
 jenv() {
   typeset command
   command="$1"
