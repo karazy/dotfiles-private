@@ -24,5 +24,9 @@ cask "Postman"
 cask "intellij-idea-ce"
 cask "clipy"
 cask "kitty"
+cask "slack"
+cask "robo-3t"
+cask "google-drive-file-stream"
 
-mas "Pixelmator Pro", id: 1289583905   
+mas "Pixelmator Pro", id: 1289583905
+mas "BetterSnapTool", id: 417375580
