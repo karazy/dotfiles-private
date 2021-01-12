@@ -8,37 +8,41 @@ MAKEFLAGS += --no-builtin-rules
 SHORTHOSTNAME=$(shell hostname | cut -d"." -f 1)
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
+DOTFILES_REPO := https://github.com/karazy/dotfiles.git
+DOTFILES_BARE := $(HOME)/.dotfiles-bare-repo/
 DOTFILES_WORK_DIR  := $(HOME)/
 DOTFILES_BARE_REPO := $(HOME)/.dotfiles-bare-repo/
+DOTFILES_BARE := $(HOME)/.dotfiles-bare-repo/
 
 define rsync-folder
 	rsync -auip --progress --safe-links --exclude=.DS_Store $(1) $(2)
 endef
 
 .PHONY: default
-default:	$(DOTFILES_BARE_REPO)/ auto-install
+default:	$(DOTFILES_BARE)/ update-dotfiles .auto-install-$(OS_NAME)
 
 
-$(DOTFILES_BARE_REPO)/: 
-	@git clone --bare https://github.com/karazy/dotfiles.git $(DOTFILES_BARE_REPO)/
-	@git --git-dir=$(DOTFILES_BARE_REPO) config --local status.showUntrackedFiles no
-	@git --git-dir=$(DOTFILES_BARE_REPO) config --local core.sparseCheckout true
+$(DOTFILES_BARE)/: 
+	@git clone --bare $(DOTFILES_REPO) $(DOTFILES_BARE)/
+	@git --git-dir=$(DOTFILES_BARE) config --local status.showUntrackedFiles no
+	@git --git-dir=$(DOTFILES_BARE) config --local core.sparseCheckout true
 # Include everything
-	@echo "/*" > $(DOTFILES_BARE_REPO)/info/sparse-checkout
+	@echo "/*" > $(DOTFILES_BARE)/info/sparse-checkout
 # Exclude readme
-	@echo "!Readme.md" >> $(DOTFILES_BARE_REPO)/info/sparse-checkout
+	@echo "!Readme.md" >> $(DOTFILES_BARE)/info/sparse-checkout
 # Ignore Library folder on Linux
 ifeq ("$(OS_NAME)","linux")
-	@echo "!Library" >> $(DOTFILES_BARE_REPO)/info/sparse-checkout
+	@echo "!Library" >> $(DOTFILES_BARE)/info/sparse-checkout
 endif	
-	@cd $(DOTFILES_WORK_DIR)/
+	@cd $(HOME)/
 # recursive-submodules is limited to git >= 2.13
 # We are doing it the old way here to increase compatibility
-#@git --git-dir=$(DOTFILES_BARE_REPO) --work-tree=$(DOTFILES_WORK_DIR)/ checkout -f --recurse-submodules
-	@git --git-dir=$(DOTFILES_BARE_REPO) --work-tree=$(DOTFILES_WORK_DIR)/ checkout -f
-	@git --git-dir=$(DOTFILES_BARE_REPO) --work-tree=$(DOTFILES_WORK_DIR)/ submodule update --init --recursive
+#@git --git-dir=$(DOTFILES_BARE) --work-tree=$(DOTFILES_WORK_DIR)/ checkout -f --recurse-submodules
+	@git --git-dir=$(DOTFILES_BARE) --work-tree=$(HOME)/ checkout -f
+	@git --git-dir=$(DOTFILES_BARE) --work-tree=$(HOME)/ submodule update --init --recursive
 # Manual pull to create FETCH_HEAD
-	@git --git-dir=$(DOTFILES_BARE_REPO) --work-tree=$(DOTFILES_WORK_DIR)/ pull
+	@git --git-dir=$(DOTFILES_BARE) --work-tree=$(HOME)/ pull
+	@touch "$(DOTFILES_BARE)/FETCH_HEAD"
 
 
 clean:	## Cleans various places
@@ -71,7 +75,7 @@ update-darwin:
 
 
 update-dotfiles:
-	@find .dotfiles-bare-repo/FETCH_HEAD -mmin +$$((7*24*60)) -exec git --git-dir=$(DOTFILES_BARE_REPO) --work-tree=$(DOTFILES_WORK_DIR)/ pull --recurse-submodules \;
+	@find "$(DOTFILES_BARE)/FETCH_HEAD" -mmin +$$((7*24*60)) -exec bash -c 'printf "\e[1;34m[Home Makefile]\e[0m Pulling dotfiles...\n"; git --git-dir=$(DOTFILES_BARE) --work-tree=$(HOME)/ pull --recurse-submodules --quiet' \;
 .PHONY: update-dotfiles
 
 auto-install-really:
@@ -79,32 +83,17 @@ auto-install-really:
 	@rm .auto-install-$(OS_NAME)
 	@$(MAKE) auto-install
 
-auto-install: $(DOTFILES_BARE_REPO)/ update-dotfiles .auto-install-$(OS_NAME)
-
 .PHONY: check-time-last-installed
 check-time-last-installed:
-	@if [ -e .auto-install-$(OS_NAME) ]; then find .auto-install-$(OS_NAME) -mmin +$$((7*24*60)) -exec bash -c 'rm -f "{}"; echo "Timestamp too old, triggering install"; $(MAKE) .auto-install-$(OS_NAME)' \; ; fi
+	@if [ -e .auto-install-$(OS_NAME) ]; then find .auto-install-$(OS_NAME) -mmin +$$((7*24*60)) -exec bash -c 'rm -f "{}"; printf "\e[1;34m[Home Makefile]\e[0m Last installation too old, triggering auto install...\n"; $(MAKE) .auto-install-$(OS_NAME)' \; ; fi
 .auto-install-darwin: .Brewfile | check-time-last-installed
 ifeq (, $(shell which brew))
 	@/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 endif
 	@export HOMEBREW_CASK_OPTS="--no-quarantine"
-	@export HOMEBREW_NO_AUTO_UPDATE=1
-	@brew update
-	@brew bundle install -v --file=.Brewfile
-	@brew cleanup -s --prune 0
+	@printf "\e[1;34m[Home Makefile]\e[0m Brew bundle install...\n"
+	@brew bundle install -v --cleanup --force --file=.Brewfile
 	@touch .auto-install-darwin
-.auto-install-linux: .apt-packages-base
-# https://stackoverflow.com/questions/25391307/pipes-with-apt-package-manager#25391412
-	@xargs -d '\n' -- sudo apt-get install -y < .apt-packages-base
-	@touch .auto-install-linux
-
-
-.PHONY: install-veracrypt
-install-linux-veracrypt: ## Installs Veracrypt from a PPA
-	sudo add-apt-repository ppa:unit193/encryption
-	sudo apt update
-	sudo apt-get install veracrypt 
 
 
 .PHONY: config config-darwin config-linux
