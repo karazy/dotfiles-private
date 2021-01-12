@@ -123,3 +123,4 @@ jenv() {
 
 export PATH=$PATH:~/.scripts
 source ~/.shell-aliases
+source ~/.shell-motd
