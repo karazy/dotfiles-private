@@ -242,3 +242,11 @@ help: ## Displays this help
 .PHONY: slideshow
 slideshow:
 	docker run --rm -p 1948:1948 -v $$(pwd)/:/slides webpronl/reveal-md:latest /slides/ --theme serif --separator "^\n\n\n" --vertical-separator "^\n\n"
+
+.PHONY: config-darwin-dock
+config-darwin-dock:
+	defaults write com.apple.dock orientation left
+	defaults write com.apple.dock autohide -bool true
+	defaults write com.apple.dock autohide-delay -float 0.5
+	defaults write com.apple.dock static-only -bool true
+	killall Dock
