@@ -29,6 +29,7 @@ cask "kitty"
 cask "slack"
 cask "robo-3t"
 cask "google-drive-file-stream"
+cask "1password"
 
 mas "Pixelmator Pro", id: 1289583905
 mas "BetterSnapTool", id: 417375580
