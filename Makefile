@@ -88,7 +88,7 @@ check-time-last-installed:
 	@if [ -e .auto-install-$(OS_NAME) ]; then find .auto-install-$(OS_NAME) -mmin +$$((7*24*60)) -exec bash -c 'rm -f "{}"; printf "\e[1;34m[Home Makefile]\e[0m Last installation too old, triggering auto install...\n"; $(MAKE) .auto-install-$(OS_NAME)' \; ; fi
 .auto-install-darwin: .Brewfile | check-time-last-installed
 ifeq (, $(shell which brew))
-	@/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 endif
 	@export HOMEBREW_CASK_OPTS="--no-quarantine"
 	@printf "\e[1;34m[Home Makefile]\e[0m Brew bundle install...\n"
@@ -137,6 +137,13 @@ config-firefox: ## Symlinks Firefox user config files to all Firefox profiles
 		mkdir -p "$$profile/chrome"; \
 		ln -sFf $$HOME/.mozilla/firefox/chrome/userChrome.css "$$profile/chrome/"; \
 	done
+
+.PHONY: install-ohmyzsh
+install-ohmyzsh:
+	OHMY= $(shell curl -fsSL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh")
+	# echo $(OHMY)
+	
+	@sh -c $(OHMY)
 
 config-set-zsh-as-default:
 	@chsh -s $(which zsh) $(whoami)

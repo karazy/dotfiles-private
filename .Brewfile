@@ -13,6 +13,7 @@ brew "gradle"
 brew "fzf"
 brew "k9s"
 brew "jq"
+brew "go"
 
 cask "firefox"
 cask "google-cloud-sdk"
