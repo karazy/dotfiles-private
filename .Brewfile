@@ -15,6 +15,7 @@ brew "k9s"
 brew "jq"
 brew "go"
 
+cask "docker"
 cask "firefox"
 cask "google-cloud-sdk"
 cask "visual-studio-code"
