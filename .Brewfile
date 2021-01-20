@@ -14,6 +14,8 @@ brew "fzf"
 brew "k9s"
 brew "jq"
 brew "go"
+brew "sops"
+brew "helm"
 
 cask "docker"
 cask "firefox"
