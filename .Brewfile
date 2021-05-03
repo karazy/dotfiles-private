@@ -16,6 +16,7 @@ brew "jq"
 brew "go"
 brew "sops"
 brew "helm"
+brew "datawire/blackbird/telepresence"
 
 cask "docker"
 cask "firefox"
@@ -32,6 +33,10 @@ cask "slack"
 cask "robo-3t"
 cask "google-drive-file-stream"
 cask "1password"
+cask "caffeine"
+cask "karabiner-elements"
+cask "osxfuse"
+cask "clockify"
 
 mas "Pixelmator Pro", id: 1289583905
 mas "BetterSnapTool", id: 417375580
