@@ -37,6 +37,7 @@ cask "caffeine"
 cask "karabiner-elements"
 cask "osxfuse"
 cask "clockify"
+cask "lens"
 
 mas "Pixelmator Pro", id: 1289583905
 mas "BetterSnapTool", id: 417375580
