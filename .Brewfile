@@ -17,6 +17,7 @@ brew "go"
 brew "sops"
 brew "helm"
 brew "buildpacks/tap/pack"
+brew "kube-ps1"
 
 cask "docker"
 cask "firefox"

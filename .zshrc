@@ -126,3 +126,6 @@ source ~/.shell-aliases
 source ~/.shell-motd
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
+ source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+ PS1='$(kube_ps1)'$PS1
