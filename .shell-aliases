@@ -5,7 +5,7 @@ function _hasCmd() { which "$1" &>/dev/null; }
 function _isMacOS() { uname -s | grep "Darwin" > /dev/null; }
 function _isLinux() { uname -s | grep "Linux" > /dev/null; }
 
-alias kc=kubectl
+alias k=kubectl
 alias tf=terraform
 alias dotfiles='git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME/'
 alias .f=dotfiles
