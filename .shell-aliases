@@ -33,3 +33,5 @@ function kc-pod-node {
 function kc-deploy-res() {
   kubectl get deployment -o json -A | jq ".items[] | select(.metadata.namespace) | .spec.template.spec.containers[] | { name: .name, res: .resources}"
 }
+
+alias cpu-temp='pmset -g thermlog'
