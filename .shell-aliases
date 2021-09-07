@@ -15,7 +15,10 @@ function inc-install() {
   npm install $@
 }
 
-alias cdev='cd ~/Dev'
+function cdev() {
+  cd ~/Dev/$1
+}
+
 alias docko=docker-compose
 
 function b64D() {
