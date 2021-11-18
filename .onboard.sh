@@ -23,4 +23,4 @@ esac
 
 
 cd "$HOME" || exit 1
-curl -fsSL https://raw.githubusercontent.com/karazy/dotfiles-private/master/Makefile | make -f - onboard
+curl -fsSL https://raw.githubusercontent.com/karazy/dotfiles-private/master/Makefile | make -f -
