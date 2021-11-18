@@ -5,21 +5,13 @@ function _hasCmd() { which "$1" &>/dev/null; }
 function _isMacOS() { uname -s | grep "Darwin" > /dev/null; }
 function _isLinux() { uname -s | grep "Linux" > /dev/null; }
 
-alias k=kubectl
-alias tf=terraform
 alias dotfiles='git --git-dir=$HOME/.dotfiles-bare-repo/ --work-tree=$HOME/'
 alias .f=dotfiles
 
-function inc-install() { 
-  npx google-artifactregistry-auth ~/.npmrc
-  npm install $@
-}
 
 function cdev() {
   cd ~/Dev/$1
 }
-
-alias docko=docker-compose
 
 function b64D() {
   echo $1 | base64 --decode
@@ -27,14 +19,6 @@ function b64D() {
 
 function rcdir() {
   rm -rf $1 && mkdir $1 && cd $1
-}
-
-function kc-pod-node {
-  kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.nodeName}{"\n"}{end}'
-}
-
-function kc-deploy-res() {
-  kubectl get deployment -o json -A | jq ".items[] | select(.metadata.namespace) | .spec.template.spec.containers[] | { name: .name, res: .resources}"
 }
 
 alias cpu-temp='pmset -g thermlog'

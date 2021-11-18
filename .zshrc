@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/de106017/.oh-my-zsh"
+export ZSH="/Users/fred/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -124,8 +124,3 @@ jenv() {
 export PATH=$PATH:~/.scripts
 source ~/.shell-aliases
 source ~/.shell-motd
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-
- source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
- PS1='$(kube_ps1)'$PS1
