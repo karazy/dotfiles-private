@@ -1,1 +1,1 @@
-`curl -fsSL https://raw.githubusercontent.com/heussd/dotfiles/master/.onboard.sh | bash`
+`curl -fsSL https://raw.githubusercontent.com/karazy/dotfiles-private/master/.onboard.sh | bash`
