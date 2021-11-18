@@ -8,7 +8,7 @@ MAKEFLAGS += --no-builtin-rules
 SHORTHOSTNAME=$(shell hostname | cut -d"." -f 1)
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
-DOTFILES_REPO := https://github.com/karazy/dotfiles.git
+DOTFILES_REPO := https://github.com/karazy/dotfiles-private.git
 DOTFILES_BARE := $(HOME)/.dotfiles-bare-repo/
 DOTFILES_WORK_DIR  := $(HOME)/
 DOTFILES_BARE_REPO := $(HOME)/.dotfiles-bare-repo/
