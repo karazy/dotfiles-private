@@ -22,3 +22,6 @@ cask "karabiner-elements"
 
 mas "Pixelmator Pro", id: 1289583905
 mas "BetterSnapTool", id: 417375580
+mas "Microsoft PowerPoint", id: 462062816
+mas "Microsoft Word", id: 462054704
+mas "Microsoft Excel", id: 462058435
